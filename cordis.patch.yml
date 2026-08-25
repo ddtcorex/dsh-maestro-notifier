@@ -1,0 +1,4 @@
+# dsh-maestro-notifier bundle patch — single row publishing the maestroNotifier service.
+- insert:
+    - id: maestro-notifier
+      name: '@ddtcorex/dsh-maestro-notifier'
