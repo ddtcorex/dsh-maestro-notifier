@@ -52,7 +52,7 @@ disappear from the type surface.
 Default branch `master`; batches go through `feat/<topic>` / `fix/<topic>`
 branches; Conventional Commits in imperative mood; one TDD task per commit;
 never commit directly to `master`. Publishing remote:
-`git@kai-github:ddtcorex/dsh-maestro-notifier.git` (add when first pushing).
+`git@github.com:ddtcorex/dsh-maestro-notifier.git` (add when first pushing).
 The `.gitignore` re-includes `!AGENTS.md` and `!CLAUDE.md` because the global
 `core.excludesFile` ignores them; `CLAUDE.md` is a symlink to this file.
 
