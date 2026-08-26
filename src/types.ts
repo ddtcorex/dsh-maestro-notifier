@@ -23,5 +23,5 @@ export interface NotifierProvider {
 export interface NotifierService {
   register(provider: NotifierProvider): void
   ids(): string[]
-  send(providerId: string, target: NotifyTarget, message: NotifyMessage): Promise<DeliveryResult>
+  send(providerId: string, target?: NotifyTarget, message?: NotifyMessage): Promise<DeliveryResult>
 }
