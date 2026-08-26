@@ -6,7 +6,16 @@ import type { DeliveryResult, NotifierProvider, NotifierService, NotifyMessage, 
  * so an optional notifier can never break a caller. Late registrations are visible
  * to the next send.
  */
-export function createNotifierService(): NotifierService {
+export interface NotifierServiceOptions {
+  /**
+   * Resolves a default target when the caller omits one (e.g. reading
+   * `notify.telegram` from the shared settings store). A throwing or empty
+   * resolution degrades to `{ sent:false, reason:'not-configured' }`.
+   */
+  resolveTarget?: (providerId: string) => Promise<NotifyTarget | undefined> | NotifyTarget | undefined
+}
+
+export function createNotifierService(options: NotifierServiceOptions = {}): NotifierService {
   const providers = new Map<string, NotifierProvider>()
 
   return {
@@ -18,10 +27,25 @@ export function createNotifierService(): NotifierService {
       return [...providers.keys()]
     },
 
-    async send(providerId: string, target: NotifyTarget, message: NotifyMessage): Promise<DeliveryResult> {
+    async send(
+      providerId: string,
+      target?: NotifyTarget,
+      message?: NotifyMessage,
+    ): Promise<DeliveryResult> {
       const provider = providers.get(providerId)
       if (provider === undefined) return { sent: false, reason: 'unknown-provider' }
-      return provider.send(target, message)
+      let effective = target
+      if (effective === undefined && options.resolveTarget !== undefined) {
+        try {
+          effective = await options.resolveTarget(providerId)
+        } catch {
+          return { sent: false, reason: 'not-configured' }
+        }
+      }
+      if (effective === undefined || message === undefined) {
+        return { sent: false, reason: 'not-configured' }
+      }
+      return provider.send(effective, message)
     },
   }
 }
