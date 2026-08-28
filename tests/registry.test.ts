@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { createNotifierService, type NotifierProvider } from '../src/registry.ts'
+import { createNotifierService, type NotifierProvider } from '../src/host/registry.ts'
 
 function fakeProvider(id: string, result = { sent: true as const }): NotifierProvider {
   return {

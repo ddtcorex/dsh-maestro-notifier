@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { createTelegramProvider, type TelegramNotifyTarget } from '../src/providers/telegram.ts'
+import { createTelegramProvider, type TelegramNotifyTarget } from '../src/host/providers/telegram.ts'
 
 function okResponse() {
   return { ok: true } as Response

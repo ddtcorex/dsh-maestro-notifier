@@ -1,4 +1,5 @@
 # dsh-maestro-notifier bundle patch — single row publishing the maestroNotifier service.
+# Service-only (no RPC) — reserved channel /dsh-maestro-notifier matches template /^\/[A-Za-z0-9._~-]+$/ for future use.
 - insert:
     - id: maestro-notifier
       name: '@ddtcorex/dsh-maestro-notifier'
