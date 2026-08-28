@@ -63,3 +63,5 @@ pnpm verify   # tsc --noEmit
 pnpm test     # vitest run
 pnpm build    # emit lib/
 ```
+
+- **Always request approval before merge or release:** never merge a PR/MR or publish a release (`git tag`/`pnpm publish`/`gh release`) without an explicit human approval — request review (`gh pr ready` / `gh pr request-review` / ask in chat) and wait for `APPROVED`.
