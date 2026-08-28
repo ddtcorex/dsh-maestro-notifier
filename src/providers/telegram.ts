@@ -30,6 +30,7 @@ async function sendTelegramText(
       body: JSON.stringify({
         chat_id: chatId,
         text,
+        parse_mode: 'HTML',
         protect_content: true,
         disable_web_page_preview: true,
       }),
