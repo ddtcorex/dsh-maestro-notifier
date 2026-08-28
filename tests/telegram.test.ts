@@ -45,6 +45,7 @@ describe('telegram provider', () => {
     expect(JSON.parse(String(init.body))).toEqual({
       chat_id: 'CHAT',
       text: 'DSH web is ready',
+      parse_mode: 'HTML',
       protect_content: true,
       disable_web_page_preview: true,
     })
