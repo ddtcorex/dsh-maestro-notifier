@@ -45,6 +45,6 @@
     "@types/node": "^22.0.0"
   },
   "dependencies": {
-    "@ddtcorex/dsh-maestro-config-lib": "workspace:^0.1.0"
+    "@ddtcorex/dsh-maestro-config-lib": "workspace:^0.2.0"
   }
 }
