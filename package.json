@@ -36,10 +36,10 @@
     }
   },
   "peerDependencies": {
-    "@deepseek-ai/cordis": "^4.0.1"
+    "@deepseek-ai/cordis": "~4.0.4"
   },
   "devDependencies": {
-    "@deepseek-ai/cordis": "^4.0.1",
+    "@deepseek-ai/cordis": "~4.0.4",
     "typescript": "^5.8.0",
     "vitest": "^2.0.0",
     "@types/node": "^22.0.0"
