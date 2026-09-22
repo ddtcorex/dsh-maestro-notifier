@@ -4,6 +4,15 @@ All notable changes to this project are documented in this file. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); this project uses
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.2] - 2026-09-22
+
+### Changed
+
+- Declare package license, repository and Node engine range in the manifest (#14).
+- Follow `@ddtcorex/dsh-maestro-config-lib` to `^0.3.0` — the previous pin
+  could not reach the release that owns the shared settings store, so a
+  registry install silently read the retired path (#15).
+
 ## [0.1.0] - 2026-08-28
 
 Initial release of `@ddtcorex/dsh-maestro-notifier`, a provider-neutral notification
