@@ -31,8 +31,6 @@ await notifier.send('telegram', undefined, { text: 'review finished' }) // targe
 
 ```sh
 dsh plugin --profile web add @ddtcorex/dsh-maestro-notifier
-# or everything at once:
-dsh plugin --profile web add @ddtcorex/dsh-maestro-meta
 ```
 
 ## Development
