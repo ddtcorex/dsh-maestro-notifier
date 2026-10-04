@@ -44,7 +44,5 @@
     "vitest": "^2.0.0",
     "@types/node": "^22.0.0"
   },
-  "dependencies": {
-    "@ddtcorex/dsh-maestro-config-lib": "workspace:^0.3.0"
-  }
+  "dependencies": {}
 }

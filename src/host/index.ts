@@ -1,5 +1,5 @@
 import type { Context } from '@deepseek-ai/cordis'
-import { get } from '@ddtcorex/dsh-maestro-config-lib'
+import { get } from './vendor/store.js'
 import { createNotifierService, type NotifierService } from './registry.ts'
 import { createTelegramProvider } from './providers/telegram.ts'
 import type { NotifyTarget } from './types.ts'
