@@ -113,16 +113,29 @@ export function NotifierSettings(props: { rpcCall: RpcCall }) {
       id: 'notifier-bot-token',
       label: 'Bot token',
       hint: telegram.hasBotToken === true ? 'A token is stored. Leave blank to keep it.' : 'Not set.',
-      children: React.createElement('input', {
-        id: 'notifier-bot-token',
-        type: 'password',
-        value: botToken,
-        placeholder: telegram.hasBotToken === true ? 'stored — type to replace' : 'not set',
-        disabled: busy,
-        autoComplete: 'new-password',
-        'data-notifier-secret': 'botToken',
-        onChange: (e: any) => setBotToken(e.target.value),
-      }),
+      children: React.createElement(
+        'div',
+        { 'data-notifier-secret-group': '' },
+        React.createElement('input', {
+          id: 'notifier-bot-token',
+          type: 'password',
+          value: botToken,
+          placeholder: telegram.hasBotToken === true ? 'stored — type to replace' : 'not set',
+          disabled: busy,
+          autoComplete: 'new-password',
+          'data-notifier-secret': 'botToken',
+          onChange: (e: any) => setBotToken(e.target.value),
+        }),
+        // The save belongs to this field: it stays disabled until the field
+        // holds something, and floating it below the row left it orphaned
+        // between two unrelated rows.
+        React.createElement('button', {
+          type: 'button',
+          disabled: busy || botToken === '',
+          'data-notifier-save': 'botToken',
+          onClick: () => void save({ telegram: { botToken } }),
+        }, 'Save token'),
+      ),
     }),
 
     Field({
@@ -140,15 +153,6 @@ export function NotifierSettings(props: { rpcCall: RpcCall }) {
         onBlur: () => void save({ telegram: { chatId: chatId || String(telegram.chatId ?? '') } }),
       }),
     }),
-
-    React.createElement('div', { 'data-notifier-actions': '' },
-      React.createElement('button', {
-        type: 'button',
-        disabled: busy || botToken === '',
-        'data-notifier-save': 'botToken',
-        onClick: () => void save({ telegram: { botToken } }),
-      }, 'Save token'),
-    ),
 
     Field({
       id: 'notifier-review-notifications',

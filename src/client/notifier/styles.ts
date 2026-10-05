@@ -45,6 +45,17 @@ export const NOTIFIER_CSS = `
 [data-notifier-hint] { margin: 0; font-size: 12px; line-height: 18px; color: var(--dsw-alias-label-tertiary); }
 [data-notifier-control] { flex: none; display: flex; align-items: center; justify-content: flex-end; gap: 8px; min-height: 36px; }
 
+/* A secret whose value is committed by a button: input and save travel
+   together, the save under the input it writes. */
+[data-notifier-secret-group] { display: flex; flex-direction: column; align-items: stretch; gap: 8px; min-width: 220px; }
+[data-notifier-secret-group] button {
+  align-self: flex-end; min-height: 32px; padding: 0 12px; border-radius: 8px;
+  border: 1px solid var(--dsw-alias-border-l2); background: var(--dsw-alias-bg-layer-1);
+  color: inherit; font: inherit; cursor: pointer;
+}
+[data-notifier-secret-group] button:disabled { opacity: 0.55; cursor: default; }
+[data-notifier-secret-group] button:focus-visible { outline: 2px solid var(--dsw-alias-border-l2); outline-offset: 2px; }
+
 [data-notifier-control] input[type="text"], [data-notifier-control] input[type="password"], [data-notifier-control] select {
   min-height: 32px; padding: 0 10px; border-radius: 8px;
   border: 1px solid var(--dsw-alias-border-l1); background: var(--dsw-alias-bg-layer-1);

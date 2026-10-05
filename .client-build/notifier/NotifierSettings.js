@@ -105,7 +105,7 @@ function NotifierSettings(props) {
         id: 'notifier-bot-token',
         label: 'Bot token',
         hint: telegram.hasBotToken === true ? 'A token is stored. Leave blank to keep it.' : 'Not set.',
-        children: React.createElement('input', {
+        children: React.createElement('div', { 'data-notifier-secret-group': '' }, React.createElement('input', {
             id: 'notifier-bot-token',
             type: 'password',
             value: botToken,
@@ -114,7 +114,16 @@ function NotifierSettings(props) {
             autoComplete: 'new-password',
             'data-notifier-secret': 'botToken',
             onChange: (e) => setBotToken(e.target.value),
-        }),
+        }), 
+        // The save belongs to this field: it stays disabled until the field
+        // holds something, and floating it below the row left it orphaned
+        // between two unrelated rows.
+        React.createElement('button', {
+            type: 'button',
+            disabled: busy || botToken === '',
+            'data-notifier-save': 'botToken',
+            onClick: () => void save({ telegram: { botToken } }),
+        }, 'Save token')),
     }), Field({
         id: 'notifier-chat-id',
         label: 'Chat id',
@@ -129,12 +138,7 @@ function NotifierSettings(props) {
             onChange: (e) => setChatId(e.target.value),
             onBlur: () => void save({ telegram: { chatId: chatId || String(telegram.chatId ?? '') } }),
         }),
-    }), React.createElement('div', { 'data-notifier-actions': '' }, React.createElement('button', {
-        type: 'button',
-        disabled: busy || botToken === '',
-        'data-notifier-save': 'botToken',
-        onClick: () => void save({ telegram: { botToken } }),
-    }, 'Save token')), Field({
+    }), Field({
         id: 'notifier-review-notifications',
         label: 'Review notifications',
         children: React.createElement('input', {
