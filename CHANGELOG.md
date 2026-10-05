@@ -4,6 +4,27 @@ All notable changes to this project are documented in this file. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); this project uses
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+- Settings RPC on `/dsh-maestro-notifier` (`getConfig`, `saveConfig`): the package now owns
+  the `notifier` settings domain and its validator, and never returns the bot token
+  (the host answers `hasBotToken`) (#19).
+- Settings tab (`settings.section` id `maestro-notifier`, order 33) for the Telegram target
+  and the review-notification toggle, drawn in the Maestro house pattern with a DOM spec
+  (#19, #21).
+
+### Changed
+
+- Embed the settings store at `src/host/vendor/store.ts` (generated from
+  `dsh-maestro-core`, hash-sealed) instead of depending on `@ddtcorex/dsh-maestro-config-lib`;
+  the settings file stays `~/.dsh/dsh-maestro-config/settings.json` (#19).
+
+### Fixed
+
+- Derive the browser loader id from the package manifest (#20).
+
 ## [0.1.2] - 2026-09-22
 
 ### Changed
