@@ -1,9 +1,9 @@
 {
   "name": "@ddtcorex/dsh-maestro-notifier",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "private": false,
   "packageManager": "pnpm@11.7.0",
-  "description": "Maestro Notify \u2014 pluggable notifier service for the DeepSeek Harness (Telegram first; registry open to further providers)",
+  "description": "Maestro Notify — pluggable notifier service for the DeepSeek Harness (Telegram first; registry open to further providers)",
   "license": "MIT",
   "repository": {
     "type": "git",
