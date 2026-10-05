@@ -42,8 +42,15 @@ exports.NotifierSettings = NotifierSettings;
  * filled field replaces it, and clearing happens server-side.
  */
 const React = __importStar(require("react"));
+const BrandMark_js_1 = require("../BrandMark.js");
+/**
+ * One setting, in the house pattern's two-column row: label and hint on the
+ * left, control held right. `htmlFor`/`id` are what give the control its
+ * accessible name — the previous markup rendered a bare `<label>` beside an
+ * input with no `id`, so nothing was associated.
+ */
 function Field(props) {
-    return React.createElement('div', { 'data-notifier-field': '' }, React.createElement('label', { 'data-notifier-label': '' }, props.label), props.children, props.hint ? React.createElement('p', { 'data-notifier-hint': '' }, props.hint) : null);
+    return React.createElement('div', { 'data-notifier-row': '' }, React.createElement('div', { 'data-notifier-row-text': '' }, React.createElement('label', { 'data-notifier-label': '', htmlFor: props.id }, props.label), props.hint ? React.createElement('p', { 'data-notifier-hint': '' }, props.hint) : null), React.createElement('div', { 'data-notifier-control': '' }, props.children));
 }
 function NotifierSettings(props) {
     const { rpcCall } = props;
@@ -89,12 +96,17 @@ function NotifierSettings(props) {
         }
     }, [rpcCall, refresh, fail]);
     const telegram = cfg.telegram ?? {};
-    return React.createElement('div', { 'data-notifier-root': '' }, React.createElement('h2', { 'data-notifier-title': '' }, 'Notifications'), notice
+    return React.createElement('div', { 'data-notifier-root': '' }, 
+    // House header: badge, title, one-line status. The notice lives here so it
+    // reports without pushing the rows down.
+    React.createElement('div', { 'data-notifier-header': '' }, React.createElement(BrandMark_js_1.BrandBadge, { style: { alignSelf: 'flex-start', marginTop: 2 } }), React.createElement('div', { 'data-notifier-heading': '' }, React.createElement('h2', { 'data-notifier-title': '' }, 'Notifications'), React.createElement('div', { 'data-notifier-status': '' }, notice
         ? React.createElement('p', { 'data-notifier-notice': '', 'data-tone': notice.tone, role: 'status' }, notice.text)
-        : null, React.createElement('div', { 'data-notifier-actions': '' }, React.createElement('button', { type: 'button', disabled: busy, onClick: () => void refresh() }, 'Refresh')), Field({
+        : React.createElement('span', null, 'Telegram target for digests and PIN notices.')))), React.createElement('div', { 'data-notifier-actions': '' }, React.createElement('button', { type: 'button', disabled: busy, onClick: () => void refresh() }, 'Refresh')), Field({
+        id: 'notifier-bot-token',
         label: 'Bot token',
         hint: telegram.hasBotToken === true ? 'A token is stored. Leave blank to keep it.' : 'Not set.',
-        children: React.createElement('input', {
+        children: React.createElement('div', { 'data-notifier-secret-group': '' }, React.createElement('input', {
+            id: 'notifier-bot-token',
             type: 'password',
             value: botToken,
             placeholder: telegram.hasBotToken === true ? 'stored — type to replace' : 'not set',
@@ -102,11 +114,22 @@ function NotifierSettings(props) {
             autoComplete: 'new-password',
             'data-notifier-secret': 'botToken',
             onChange: (e) => setBotToken(e.target.value),
-        }),
+        }), 
+        // The save belongs to this field: it stays disabled until the field
+        // holds something, and floating it below the row left it orphaned
+        // between two unrelated rows.
+        React.createElement('button', {
+            type: 'button',
+            disabled: busy || botToken === '',
+            'data-notifier-save': 'botToken',
+            onClick: () => void save({ telegram: { botToken } }),
+        }, 'Save token')),
     }), Field({
+        id: 'notifier-chat-id',
         label: 'Chat id',
         hint: 'The Telegram chat that receives digests and PIN notices.',
         children: React.createElement('input', {
+            id: 'notifier-chat-id',
             type: 'text',
             value: chatId || String(telegram.chatId ?? ''),
             placeholder: '-1001234567890',
@@ -115,18 +138,14 @@ function NotifierSettings(props) {
             onChange: (e) => setChatId(e.target.value),
             onBlur: () => void save({ telegram: { chatId: chatId || String(telegram.chatId ?? '') } }),
         }),
-    }), React.createElement('button', {
-        type: 'button',
-        disabled: busy || botToken === '',
-        'data-notifier-save': 'botToken',
-        onClick: () => void save({ telegram: { botToken } }),
-    }, 'Save token'), Field({
+    }), Field({
+        id: 'notifier-review-notifications',
         label: 'Review notifications',
         children: React.createElement('input', {
+            id: 'notifier-review-notifications',
             type: 'checkbox',
             checked: cfg.policy?.reviewNotifications === true,
             disabled: busy,
-            'aria-label': 'Review notifications',
             'data-notifier-toggle': 'reviewNotifications',
             onChange: (e) => void save({ policy: { reviewNotifications: e.target.checked } }),
         }),
