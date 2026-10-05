@@ -5,3 +5,6 @@ lib/
 # Re-include coordination files ignored by the global core.excludesFile
 !AGENTS.md
 !CLAUDE.md
+
+# tsc client output (tsconfig.client.json outDir), like core's lib/: build artifact.
+.client-build/
