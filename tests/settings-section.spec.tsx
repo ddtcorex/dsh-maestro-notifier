@@ -64,3 +64,56 @@ describe('NotifierSettings', () => {
     })
   })
 })
+
+describe('NotifierSettings — house pattern', () => {
+  it('draws the Maestro header: badge, title, status line', async () => {
+    const { container } = render(<NotifierSettings rpcCall={rpc()} />)
+
+    // The badge is how a user tells a Maestro section from a harness one at a
+    // glance; it is the first thing every conforming section carries.
+    expect(container.querySelector('[data-maestro-logo]')).toBeInTheDocument()
+
+    const title = container.querySelector('[data-notifier-title]') as HTMLElement
+    expect(title).toBeInTheDocument()
+    expect(container.querySelector('[data-notifier-status]')).toBeInTheDocument()
+  })
+
+  it('holds each field in a two-column row so the control sits right', async () => {
+    const { container } = render(<NotifierSettings rpcCall={rpc()} />)
+
+    // Every field, not just some: a half-migrated section reads worse than
+    // either extreme.
+    const rows = container.querySelectorAll('[data-notifier-row]')
+    expect(rows.length).toBeGreaterThanOrEqual(3)
+    for (const row of rows) {
+      expect(row.querySelector('[data-notifier-row-text]')).toBeInTheDocument()
+      expect(row.querySelector('[data-notifier-control]')).toBeInTheDocument()
+    }
+  })
+
+  it('gives every control an accessible name', async () => {
+    render(<NotifierSettings rpcCall={rpc()} />)
+
+    // The labels carried no htmlFor and the inputs no id, so nothing was
+    // associated. getByLabelText is the assertion that fails when it regresses.
+    await waitFor(() => {
+      expect(screen.getByLabelText('Bot token')).toBeInTheDocument()
+    })
+    expect(screen.getByLabelText('Chat id')).toBeInTheDocument()
+    expect(screen.getByLabelText('Review notifications')).toBeInTheDocument()
+  })
+
+  it('keeps the notice in the status line without reflowing the rows', async () => {
+    const failing = vi.fn(async (endpoint: string) => {
+      if (endpoint === 'getConfig') throw new Error('Telegram rejected the token')
+      return {}
+    }) as any
+    const { container } = render(<NotifierSettings rpcCall={failing} />)
+
+    await waitFor(() => {
+      expect(screen.getByText('Telegram rejected the token')).toBeInTheDocument()
+    })
+    // Still announced, now in the header rather than as a block above the form.
+    expect(container.querySelector('[data-notifier-status] [role="status"]')).toBeInTheDocument()
+  })
+})
