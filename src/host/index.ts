@@ -1,10 +1,13 @@
 import type { Context } from '@deepseek-ai/cordis'
-import { get } from '@ddtcorex/dsh-maestro-config-lib'
+import { get } from './vendor/store.js'
+import { createRpcHandler, RPC_CHANNEL } from './rpc.js'
 import { createNotifierService, type NotifierService } from './registry.ts'
 import { createTelegramProvider } from './providers/telegram.ts'
 import type { NotifyTarget } from './types.ts'
 
 export const name = 'maestro-notifier'
+/** Side effect: registers the `notifier` domain validator the store used to register itself. */
+import './validators.js'
 
 declare module '@deepseek-ai/cordis' {
   interface Context {
@@ -39,4 +42,12 @@ export function apply(ctx: Context): void {
   })
   notifier.register(createTelegramProvider())
   ctx.provide('maestroNotifier', notifier)
+
+  // The telegram settings moved here from review. The row must carry
+  // `webServer`: rpc.handle registers its route inside an effect fiber that
+  // carries only the ROW's inject, not the module's.
+  ctx.effect(() =>
+    (ctx as any).connection.rpc.handle(RPC_CHANNEL, createRpcHandler()),
+    'maestro-notifier: settings rpc',
+  )
 }

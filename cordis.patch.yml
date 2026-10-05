@@ -1,5 +1,13 @@
 # dsh-maestro-notifier bundle patch — single row publishing the maestroNotifier service.
-# Service-only (no RPC) — reserved channel /dsh-maestro-notifier matches template /^\/[A-Za-z0-9._~-]+$/ for future use.
+# The maestroNotifier service plus the telegram settings RPC on this package's own channel.
 - insert:
     - id: maestro-notifier
       name: '@ddtcorex/dsh-maestro-notifier'
+      # The channel this row always reserved, now actually served: the telegram
+      # settings endpoints review used to host for it.
+      channel: /dsh-maestro-notifier
+      # rpc.handle registers a webServer route inside an effect fiber that
+      # carries only the row's inject, not the module's; without webServer the
+      # row fails on a harness that provides webServer after rows apply
+      # (DSH 0.1.5-rc.1+).
+      inject: ['connection', 'webServer']
