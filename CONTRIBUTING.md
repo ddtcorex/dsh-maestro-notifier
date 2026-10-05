@@ -5,7 +5,7 @@ Thank you for contributing to **dsh-maestro-notifier** (`@ddtcorex/dsh-maestro-n
 ## Getting Started
 
 1. **Fork and clone** `github.com/ddtcorex/dsh-maestro-notifier`.
-2. Install dependencies (requires Node.js 20+, pnpm 10+):
+2. Install dependencies (requires Node.js `^22.19.0 || >=24.0.0`; pnpm comes from `packageManager` in `package.json`):
 
    ```bash
    pnpm install
@@ -14,7 +14,7 @@ Thank you for contributing to **dsh-maestro-notifier** (`@ddtcorex/dsh-maestro-n
 3. Build the Cordis plugin (TypeScript → `lib/`):
 
    ```bash
-   pnpm build        # runs tsc -p tsconfig.json, emits lib/index.js (flat)
+   pnpm build        # tsc host + client, then the client bundle; emits lib/index.js (flat) and lib/client.js
    pnpm verify      # tsc --noEmit — typecheck without emitting
    pnpm test        # vitest run
    ```
@@ -22,11 +22,15 @@ Thank you for contributing to **dsh-maestro-notifier** (`@ddtcorex/dsh-maestro-n
 4. Open the project in your editor. Key layout:
 
    ```
-   src/types.ts              # DeliveryResult, NotifyMessage, NotifyTarget, NotifierProvider, NotifierService
-   src/registry.ts           # createNotifierService()
-   src/providers/telegram.ts # createTelegramProvider()
-   src/index.ts              # Cordis row maestro-notifier; provides 'maestroNotifier'
-   tests/                    # vitest: registry dispatch + telegram transport
+   src/host/types.ts              # DeliveryResult, NotifyMessage, NotifyTarget, NotifierProvider, NotifierService
+   src/host/registry.ts           # createNotifierService()
+   src/host/providers/telegram.ts # createTelegramProvider()
+   src/host/index.ts              # Cordis row maestro-notifier; provides 'maestroNotifier'
+   src/host/rpc.ts                # settings RPC on /dsh-maestro-notifier
+   src/host/validators.ts         # notifier domain validator
+   src/host/vendor/store.ts       # embedded settings store (generated, hash-sealed)
+   src/client/                    # Settings tab (settings.section id maestro-notifier)
+   tests/                         # vitest: registry, telegram, rpc, validators, store drift, settings DOM spec
    cordis.patch.yml          # bundle patch inserting the single row
    ```
 
