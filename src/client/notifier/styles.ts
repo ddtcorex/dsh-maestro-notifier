@@ -46,20 +46,29 @@ export const NOTIFIER_CSS = `
 [data-notifier-control] { flex: none; display: flex; align-items: center; justify-content: flex-end; gap: 8px; min-height: 36px; }
 
 /* A secret whose value is committed by a button: input and save travel
-   together, the save under the input it writes. */
-[data-notifier-secret-group] { display: flex; flex-direction: column; align-items: stretch; gap: 8px; min-width: 220px; }
+   together on ONE row. The button used to sit on a row of its own below the
+   field — the group was a column and the button align-self: flex-end — which
+   left it orphaned between two unrelated rows. It stays disabled until the
+   field holds something, so proximity to that field is the point. */
+[data-notifier-secret-group] { display: flex; flex-direction: row; align-items: center; gap: 8px; min-width: 220px; }
+[data-notifier-secret-group] input { flex: 1 1 auto; min-width: 0; }
 [data-notifier-secret-group] button {
-  align-self: flex-end; min-height: 32px; padding: 0 12px; border-radius: 8px;
+  flex: none; align-self: center; min-height: 44px; padding: 0 12px; border-radius: 8px;
   border: 1px solid var(--dsw-alias-border-l2); background: var(--dsw-alias-bg-layer-1);
   color: inherit; font: inherit; cursor: pointer;
 }
 [data-notifier-secret-group] button:disabled { opacity: 0.55; cursor: default; }
 [data-notifier-secret-group] button:focus-visible { outline: 2px solid var(--dsw-alias-border-l2); outline-offset: 2px; }
 
+/* Every row control gets the same box — the shared settings field box, copied
+   from the host's own form primitive (ui-primitives ConfigField) so this tab
+   follows the shell instead of carrying a geometry of its own. Only
+   min-height: 44px is Maestro's: it is the touch target AGENTS.md requires,
+   which the host's line-box sizing does not give. */
 [data-notifier-control] input[type="text"], [data-notifier-control] input[type="password"], [data-notifier-control] select {
-  min-height: 32px; padding: 0 10px; border-radius: 8px;
-  border: 1px solid var(--dsw-alias-border-l1); background: var(--dsw-alias-bg-layer-1);
-  color: inherit; font: inherit;
+  min-height: 44px; padding: 6px 12px; border: 0.5px solid var(--dsw-alias-border-l4);
+  border-radius: var(--dsw-radius-md); background: var(--dsw-alias-bg-layer-3);
+  color: var(--dsw-alias-label-primary); font: inherit;
 }
 [data-notifier-control] input:focus-visible, [data-notifier-control] select:focus-visible {
   outline: 2px solid var(--dsw-alias-border-l2); outline-offset: 2px;
