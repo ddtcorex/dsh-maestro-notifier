@@ -74,6 +74,8 @@ describe('the token field row', () => {
     const body = ruleBody(styles, '[data-notifier-secret-group] button')
     assert.match(body, /border:\s*1px solid var\(--dsw-alias-border-l2\)/)
     assert.match(body, /background:\s*var\(--dsw-alias-bg-layer-1\)/)
-    assert.match(body, /min-height:\s*32px/)
+    // Height is no longer chrome it "already had": it follows the field (44px), and
+    // styles-coverage.test.ts compares it to the field rule directly.
+    assert.match(body, /min-height:\s*44px/)
   })
 })

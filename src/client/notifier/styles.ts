@@ -53,7 +53,7 @@ export const NOTIFIER_CSS = `
 [data-notifier-secret-group] { display: flex; flex-direction: row; align-items: center; gap: 8px; min-width: 220px; }
 [data-notifier-secret-group] input { flex: 1 1 auto; min-width: 0; }
 [data-notifier-secret-group] button {
-  flex: none; align-self: center; min-height: 32px; padding: 0 12px; border-radius: 8px;
+  flex: none; align-self: center; min-height: 44px; padding: 0 12px; border-radius: 8px;
   border: 1px solid var(--dsw-alias-border-l2); background: var(--dsw-alias-bg-layer-1);
   color: inherit; font: inherit; cursor: pointer;
 }
