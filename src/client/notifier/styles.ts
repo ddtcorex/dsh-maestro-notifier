@@ -56,10 +56,15 @@ export const NOTIFIER_CSS = `
 [data-notifier-secret-group] button:disabled { opacity: 0.55; cursor: default; }
 [data-notifier-secret-group] button:focus-visible { outline: 2px solid var(--dsw-alias-border-l2); outline-offset: 2px; }
 
+/* Every row control gets the same box — the shared settings field box, copied
+   from the host's own form primitive (ui-primitives ConfigField) so this tab
+   follows the shell instead of carrying a geometry of its own. Only
+   min-height: 44px is Maestro's: it is the touch target AGENTS.md requires,
+   which the host's line-box sizing does not give. */
 [data-notifier-control] input[type="text"], [data-notifier-control] input[type="password"], [data-notifier-control] select {
-  min-height: 32px; padding: 0 10px; border-radius: 8px;
-  border: 1px solid var(--dsw-alias-border-l1); background: var(--dsw-alias-bg-layer-1);
-  color: inherit; font: inherit;
+  min-height: 44px; padding: 6px 12px; border: 0.5px solid var(--dsw-alias-border-l4);
+  border-radius: var(--dsw-radius-md); background: var(--dsw-alias-bg-layer-3);
+  color: var(--dsw-alias-label-primary); font: inherit;
 }
 [data-notifier-control] input:focus-visible, [data-notifier-control] select:focus-visible {
   outline: 2px solid var(--dsw-alias-border-l2); outline-offset: 2px;
