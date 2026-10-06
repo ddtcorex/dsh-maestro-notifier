@@ -46,10 +46,14 @@ export const NOTIFIER_CSS = `
 [data-notifier-control] { flex: none; display: flex; align-items: center; justify-content: flex-end; gap: 8px; min-height: 36px; }
 
 /* A secret whose value is committed by a button: input and save travel
-   together, the save under the input it writes. */
-[data-notifier-secret-group] { display: flex; flex-direction: column; align-items: stretch; gap: 8px; min-width: 220px; }
+   together on ONE row. The button used to sit on a row of its own below the
+   field — the group was a column and the button align-self: flex-end — which
+   left it orphaned between two unrelated rows. It stays disabled until the
+   field holds something, so proximity to that field is the point. */
+[data-notifier-secret-group] { display: flex; flex-direction: row; align-items: center; gap: 8px; min-width: 220px; }
+[data-notifier-secret-group] input { flex: 1 1 auto; min-width: 0; }
 [data-notifier-secret-group] button {
-  align-self: flex-end; min-height: 32px; padding: 0 12px; border-radius: 8px;
+  flex: none; align-self: center; min-height: 32px; padding: 0 12px; border-radius: 8px;
   border: 1px solid var(--dsw-alias-border-l2); background: var(--dsw-alias-bg-layer-1);
   color: inherit; font: inherit; cursor: pointer;
 }
