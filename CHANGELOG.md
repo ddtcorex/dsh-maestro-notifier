@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.2.1] - 2026-10-06
+
+### Fixed
+
+- **Settings fields share one box.** The host's own `ConfigField` declaration plus a 44px touch floor; the token Save button beside its field is 44px tall to equal it.
+
 All notable changes to this project are documented in this file. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); this project uses
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
