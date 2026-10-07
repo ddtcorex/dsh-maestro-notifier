@@ -13,7 +13,7 @@ import { NOTIFIER_CSS } from './notifier/styles.js'
 import { registerSettingsNavIcon, SETTINGS_NAV_MARKER } from './settings-nav-icon.js'
 
 /** The channel this row serves; the one it always reserved. */
-export const NOTIFIER_CHANNEL = '/dsh-maestro-notifier'
+const NOTIFIER_CHANNEL = '/dsh-maestro-notifier'
 
 export type RpcCall = (endpoint: string, payload?: unknown) => Promise<any>
 
@@ -26,7 +26,7 @@ function unwrap(res: any): any {
   return res && typeof res === 'object' && 'ok' in res ? (res.ok ? res.value : null) : res
 }
 
-export function makeRpcCall(ctx: any): RpcCall {
+function makeRpcCall(ctx: any): RpcCall {
   return async (endpoint, payload) => {
     const conn = ctx.get?.('connection')
     if (conn?.rpc?.call === undefined) throw new Error('RPC not available')
