@@ -9,7 +9,8 @@
       # rpc.handle registers a webServer route inside an effect fiber that
       # carries only the row's inject, not the module's; without webServer the
       # row fails on a harness that provides webServer after rows apply
-      # (DSH 0.1.5-rc.1+).
+      # (DSH 0.1.5-rc.1+); on DSH 0.2.x it is not sufficient on its own, see
+      # the `connection` entry at the end of this file.
       inject: ['connection', 'webServer']
 
 # DSH 0.2.x resolves `webServer` for `ctx.connection.rpc.handle` on the

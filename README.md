@@ -34,11 +34,28 @@ await notifier.send('telegram', undefined, { text: 'review finished' }) // targe
   never the value. A Settings tab (`settings.section` id `maestro-notifier`, order 33)
   edits the Telegram target and the review-notification toggle.
 
+## Requirements
+
+- Node.js `^22.19.0 || >=24.0.0` and pnpm 11+. A shell that defaults to Node 20 fails with `No such built-in module: node:sqlite`; put a Node 22 `bin` first on `PATH` before running `dsh` or `pnpm`.
+- DSH 0.1.x or 0.2.x (peer range `<0.3.0-0`).
+
 ## Install
 
 ```sh
 dsh plugin --profile web add @ddtcorex/dsh-maestro-notifier
 ```
+
+The package ships its own `cordis.patch.yml`, applied automatically. It includes a
+`connection` entry that declares `webServer`, which DSH 0.2.x needs before
+`rpc.handle` can register a channel. Do not copy it into the profile patch, and do not
+add the rows by hand (duplicate ids crash the loader). Restart `dsh web` after install.
+
+To get an exact release instead of whatever the package manager resolves, pin it:
+`dsh plugin --profile web add @ddtcorex/dsh-maestro-notifier@<version>`.
+
+Installed with `link:` from a checkout? After every `git pull`, run `pnpm install && pnpm build`
+(`lib/` is gitignored) and restart `dsh web`.
+
 
 ## Development
 
