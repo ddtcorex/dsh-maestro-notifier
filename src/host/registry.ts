@@ -50,4 +50,4 @@ export function createNotifierService(options: NotifierServiceOptions = {}): Not
   }
 }
 
-export type { DeliveryResult, NotifierProvider, NotifierService, NotifyMessage, NotifyTarget }
+export type { NotifierProvider, NotifierService }

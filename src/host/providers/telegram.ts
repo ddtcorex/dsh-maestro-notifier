@@ -53,4 +53,3 @@ export function createTelegramProvider(dependencies: TelegramProviderDependencie
   }
 }
 
-export type { DeliveryResult, NotifyMessage, NotifyTarget }
