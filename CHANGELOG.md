@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.2.4] - 2026-10-10
+
+### Fixed
+
+- **Connection row injects webStartup.** DSH 0.2.1-alpha.x removed the webRuntime service; a connection entry still injecting it waits for a service that never mounts and dsh web never boots.
+
 ## [0.2.3] - 2026-10-07
 
 ### Fixed
