@@ -18,7 +18,7 @@ describe('maestro-notifier settings section', () => {
 
   it('serves only this package own channel', () => {
     expect(entry).toContain('/dsh-maestro-notifier')
-    expect(entry).not.toContain('/dsh-maestro-review')
+    expect(entry).not.toContain('/maestro-reviewer')
   })
 
   it('registers exactly one section', () => {
