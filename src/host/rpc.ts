@@ -2,10 +2,10 @@
  * Loopback RPC for the notifier's own settings, on the channel the package row
  * already reserved.
  *
- * The telegram keys used to be saved through `maestro.saveConfig` on
- * `/dsh-maestro-review`, which meant the plugin that owns the Telegram target
- * had no way to persist it and review had to know the key names. Both are now
- * wrong-way-round dependencies and both are gone.
+ * The telegram keys used to be saved through a shared `saveConfig` call on
+ * another package's channel, which meant the plugin that owns the Telegram
+ * target had no way to persist it and the caller had to know the key names.
+ * Both are now wrong-way-round dependencies and both are gone.
  *
  * Every answer uses the `RpcResult` envelope. A bare `{ ok: true }` is not a
  * usable success: clients read `res.value`, so it answers every field with
