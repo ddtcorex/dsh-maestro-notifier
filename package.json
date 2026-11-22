@@ -3,7 +3,7 @@
   "version": "0.2.4",
   "private": false,
   "packageManager": "pnpm@11.7.0",
-  "description": "Maestro Notify — pluggable notifier service for the DeepSeek Harness (Telegram first; registry open to further providers)",
+  "description": "Maestro Notify \u2014 pluggable notifier service for the DeepSeek Harness (Telegram first; registry open to further providers)",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -47,10 +47,10 @@
     }
   },
   "peerDependencies": {
-    "@deepseek-ai/cordis": "~4.0.4"
+    "@deepseek-ai/cordis": "~4.1.0 || ~4.2.0-alpha.1"
   },
   "devDependencies": {
-    "@deepseek-ai/cordis": "~4.0.4",
+    "@deepseek-ai/cordis": "~4.2.0-alpha.1",
     "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.3.3",
     "@types/node": "^22.0.0",
