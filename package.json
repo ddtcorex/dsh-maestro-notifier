@@ -3,7 +3,8 @@
   "version": "0.2.4",
   "private": false,
   "packageManager": "pnpm@11.7.0",
-  "description": "Maestro Notify \u2014 pluggable notifier service for the DeepSeek Harness (Telegram first; registry open to further providers)",
+  "description": "Maestro notifier: pluggable notifier service for DeepSeek Harness (Telegram first; registry open to further providers)",
+  "icon": "assets/icon.svg",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -17,6 +18,7 @@
   "types": "./lib/index.d.ts",
   "exports": {
     ".": "./lib/index.js",
+    "./locale/*.json": "./locale/*.json",
     "./package.json": "./package.json",
     "./client": {
       "types": "./lib/types/client/index.d.ts",
@@ -27,7 +29,9 @@
     "lib",
     "src",
     "cordis.patch.yml",
-    "README.md"
+    "README.md",
+    "assets",
+    "locale"
   ],
   "scripts": {
     "build": "tsc -p tsconfig.json && tsc -p tsconfig.client.json && node scripts/build-client.mjs",

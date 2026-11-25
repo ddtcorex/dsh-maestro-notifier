@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Maestro notifier",
+    "description": "Publishes the maestroNotifier service the other Maestro plugins deliver through, with Telegram built in and a delivery call that never throws into its caller. A provider is reached by id, an unknown id or a target that cannot be read comes back as an unsent result with a reason, and nothing leaves the machine until a bot token and chat id are saved in its own Settings section."
+  }
+}
