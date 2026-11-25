@@ -1,6 +1,6 @@
 {
   "name": "@ddtcorex/dsh-maestro-notifier",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "private": false,
   "packageManager": "pnpm@11.7.0",
   "description": "Maestro notifier: pluggable notifier service for DeepSeek Harness (Telegram first; registry open to further providers)",
